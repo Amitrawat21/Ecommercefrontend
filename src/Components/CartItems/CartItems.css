@@ -195,10 +195,17 @@ cursor: pointer;
 
         display: none;
         grid-template-columns: 1fr 4.5fr 1fr;
-        
+        margin-top: 8px;
         padding: 0 5px;
 
        
+    }
+
+    .cartitems hr {
+        height: 3px;
+        background: #e2e2e2;
+        border: 0;
+        margin-top: 8px;
     }
 
     .cartitems-format{

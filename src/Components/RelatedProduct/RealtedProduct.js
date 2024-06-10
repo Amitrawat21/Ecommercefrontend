@@ -9,7 +9,7 @@ const RealtedProduct = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   useEffect(() => {
     const filtered = all_product.filter(item => item.category === props?.product?.category);
-    setFilteredProducts(filtered);
+    setFilteredProducts(filtered.slice(0,6));
  
   
   }, [all_product, props.category ]);
