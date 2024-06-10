@@ -4,7 +4,7 @@
     {
         id: 1,
         img: "https://i.ibb.co/cXFnLLV/3.png",
-        title: "LOUNGEWEAR LOVE",
+        title: "LOUNGEWEAR ",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "fbf0f4",
       },
@@ -20,7 +20,7 @@
       {
         id: 3,
         img: "https://www.instaloverz.com/wp-content/uploads/2017/06/15-Fashion-Outfit-Of-Korean-Men.jpg",
-        title: "SUPER KOREAN STYLE",
+        title: " KOREAN STYLE",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "f6f4f8",
       },
