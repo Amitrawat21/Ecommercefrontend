@@ -52,8 +52,13 @@ const Login = () => {
         } ,3000)
       
       }
-      else if(!response.data.success){
-        toast.error("user not found")
+      else if(response.data.status  == 402){
+        toast.error("user email not found")
+
+      }
+
+      else if(response.data.status == 401){
+        toast.error("password  is incorrect ")
 
       }
    

@@ -3,20 +3,19 @@
   margin-bottom: 95px;
   padding: 50px;
 }
+
+.loader-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .Checkout_container h2 {
   font-size: 40px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-style: inherit;
 }
 
-/* .checkout_wrapper {
-    background-color: #ffffff;
-    margin-top: 40px;
-    padding: 40px;
-  
-    width: 100%;
-  }
-   */
+
 .uppar_wrapper {
   display: flex;
   justify-content: space-between;
@@ -42,6 +41,14 @@
 .allOrderProduct {
   display: flex;
   flex-direction: column;
+}
+
+.allOrderProduct .empty_image{
+  width: 100%;
+
+  height: 66vh;
+  margin-top: 10px;
+
 }
 
 .singleOrderProduct {
@@ -225,7 +232,7 @@
 @media (max-width: 500px) {
   .Checkout_container {
     padding: 20px;
-    margin-bottom: 40px;
+  
   }
 
   .allOrderProduct p{
@@ -270,28 +277,32 @@
     padding: 2px 4px;
     font-size: 13px;
   }
+.other_detail p{
+  font-size: 13px;
 
+}
   .lower h3 {
     font-size: 15px;
   }
 
   
+.allOrderProduct .empty_image{
+  width: 100%;
+
+  height: 40vh;
+  margin-top: 50px;
+
 }
 
-/* @media (max-width: 500px) {
-    .Checkout_container {
-      padding: 20px;
-      width: 780px;
-      margin-top: 80px;
-   width: 780px;
-   
-    }
+.loader-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
   
-    .my-toast-class{
-      margin-top: 100px;
-      width: 770px;
-  }
-  
-  
-  
-  } */
+}
+
+
