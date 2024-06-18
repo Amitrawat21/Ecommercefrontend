@@ -11,6 +11,7 @@ const Navbar = () => {
   const { getTotalCartItems } = useContext(ShopContext);
   const menuRef = useRef();
   const location = useLocation();
+  const auth = localStorage.getItem('auth')
 
   useEffect(() => {
     const path = location.pathname;
@@ -66,10 +67,16 @@ const Navbar = () => {
           <Link to="/kids">Kids</Link>
           {menu === "kids" ? <hr /> : ""}
         </li>
-        <li onClick={() => setMenu("my-orders")}>
-          <Link to="/orders">Orders</Link>
-          {menu === "my-orders" ? <hr /> : ""}
-        </li>
+        {
+           auth && (
+            <li onClick={() => setMenu("my-orders")}>
+            <Link to="/orders">Orders</Link>
+            {menu === "my-orders" ? <hr /> : ""}
+          </li>
+
+           )
+        }
+       
       </ul>
       <div className='nav-login-cart'>
         {localStorage.getItem('auth') ? (
