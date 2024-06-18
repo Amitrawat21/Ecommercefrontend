@@ -20,7 +20,7 @@ const ShopContextProvider = (props) => {
   const [userCheckout, setUserCheckout] = useState({});
 
   const alldata = async () => {
-    const res = await axios.get("https://ecommercebackend-1-02g7.onrender.com/getAllProduct");
+    const res = await axios.get("https://ecommercebackend-11d1.onrender.com/getAllProduct");
     setAll_Product(res.data.data);
   };
 
@@ -33,7 +33,7 @@ const ShopContextProvider = (props) => {
 
       if (localStorage.getItem("auth")) {
         const response = await axios.post(
-          "https://ecommercebackend-1-02g7.onrender.com/addtocart",
+          "https://ecommercebackend-11d1.onrender.com/addtocart",
           {
             itemId,
           },
@@ -62,7 +62,7 @@ const ShopContextProvider = (props) => {
 
       if (localStorage.getItem("auth")) {
         await axios.post(
-          "https://ecommercebackend-1-02g7.onrender.com/removefromcart",
+          "https://ecommercebackend-11d1.onrender.com/removefromcart", //https://ecommercebackend-11d1.onrender.com
           {
             itemId,
           },
@@ -78,6 +78,14 @@ const ShopContextProvider = (props) => {
       console.error("Error removing from cart:", error);
     }
   };
+  const removeAllCart = async (email)=>{
+    const response = await axios.post("https://ecommercebackend-11d1.onrender.com/removAllCart" , {email :email })
+    if(response.data.success){
+      setCartItems(getDefaultCart())
+
+    }
+
+  }
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
@@ -106,11 +114,11 @@ const ShopContextProvider = (props) => {
     try {
       if (localStorage.getItem("auth")) {
         const response = await axios.get(
-          "https://ecommercebackend-1-02g7.onrender.com/getcart",
+          "https://ecommercebackend-11d1.onrender.com/getcart",
           {
             headers: {
               "auth ": `${localStorage.getItem("auth")}`,
-              "Content-Type": "application/json",
+              "Content-Type": "7application/json",
             },
           }
         );
@@ -127,7 +135,7 @@ const ShopContextProvider = (props) => {
   const getallcart = async (email) => {
     try {
       const response = await axios.get(
-        "https://ecommercebackend-1-02g7.onrender.com/allcart",
+        "https://ecommercebackend-11d1.onrender.com/allcart",
         {
           headers: {
             "auth": `${localStorage.getItem("auth")}`,
@@ -171,6 +179,8 @@ const ShopContextProvider = (props) => {
     removeCart,
     getTotalCartItems,
     userCheckout,
+ removeAllCart 
+
   };
 
   return (
@@ -184,3 +194,6 @@ const ShopContextProvider = (props) => {
 };
 
 export default ShopContextProvider;
+
+
+///https://ecommercebackend-1-02g7.onrender.com

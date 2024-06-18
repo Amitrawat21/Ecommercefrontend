@@ -9,7 +9,7 @@ const Newcollection = () => {
   const[new_collection, set_new_collection] = useState([])
 
   const getNewCollection = async()=>{
-    const res = await axios.get("https://ecommercebackend-1-02g7.onrender.com/getNewCollection")
+    const res = await axios.get("https://ecommercebackend-11d1.onrender.com/getNewCollection")
     set_new_collection(res.data.alldata)
     
   }

@@ -1,10 +1,13 @@
 .realtedproducts{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    height: 90vh;
+    padding: 0 50px;
+   
     margin-bottom: 100px;
+
 }
 
 .realtedproducts h1{
@@ -22,8 +25,12 @@
 
 .relatedproducts-item {
     margin-top: 50px;
-    display: flex;
-    gap: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+   column-gap: 40px;
+    gap: 30px;
+
 
 }
 

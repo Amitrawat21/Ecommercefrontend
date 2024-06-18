@@ -45,7 +45,7 @@ const ShopCategory = (props) => {
 
 
   const searchHandle = (e) => {
-    const searchTerm = e.target.value;
+    const searchTerm = e.target.value.toLowerCase();
     setSearchProduct(searchTerm);
   
     // If the search term is empty, show all products from the current category
@@ -71,7 +71,7 @@ const ShopCategory = (props) => {
         </div>
 
         <div className='shopcategory-sort'>
-          <select style={{ border: "none", fontSize: "15px" }} onChange={changehandler}>
+          <select style={{ border: "none", fontSize: "15px" , outline : "none" }} onChange={changehandler}>
             <option value= ''>select</option>
             <option value="minprice">min price to max price</option>
             <option value="maxprice">max price to min price</option>

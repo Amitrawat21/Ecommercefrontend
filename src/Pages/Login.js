@@ -38,7 +38,7 @@ const Login = () => {
   const login = async () => {
     try {
       const response = await axios.post(
-        "https://ecommercebackend-1-02g7.onrender.com/login",
+        "https://ecommercebackend-11d1.onrender.com/login",
         formData
       );
       console.log(response, "jjj")
@@ -65,7 +65,7 @@ const Login = () => {
   const signup = async () => {
     try {
       const response = await axios.post(
-        "https://ecommercebackend-1-02g7.onrender.com/register",
+        "https://ecommercebackend-11d1.onrender.com/register",
         formData
       );
       if(response.data.success === false){

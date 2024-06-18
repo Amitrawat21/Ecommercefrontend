@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useMemo ,useEffect } from 'react';
 import "./CartItems.css";
 import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from "../Assest/cart_cross_icon.png";
@@ -8,15 +8,44 @@ import { toast } from 'react-toastify';
 
 const CartItems = () => {
   const KEY = "pk_test_51LvdGASGXtUoYRLzUHg0K0Vo4XcpgyFaW2YTBQEpBnfkcAhSgavP54nB53cGCPIZUyNoPntPmwmE73FJbHyAxlqq00UW0KQyqb";
-  const { all_product, cartItems, addCart, removeCart, getTotalCartAmount, userEmail,  userCheckout } = useContext(ShopContext);
+  const { all_product, cartItems, addCart, removeCart, getTotalCartAmount, userEmail,  userCheckout  , getTotalCartItems , removeAllCart} = useContext(ShopContext);
   const [stripeToken, setStripeToken] = useState(null);
   const [checkout, setCheckout] = useState(localStorage.getItem('checkout') === 'true' || userCheckout.checkout);
+  const[orderProduct , setOrderProduct] = useState([])
 
+console.log(all_product , "alll")
   const isAuthenticated = localStorage.getItem("auth");
 
   const onToken = (token) => {
     setStripeToken(token);
   };
+
+ console.log(getTotalCartItems() , "total cartttt")
+
+  useEffect(() => {
+    console.log('useEffect triggered'); // Debugging line
+    console.log('Checkout state:', checkout); // Debugging line
+
+    if (all_product.length > 0 && Object.keys(cartItems).length > 0) {
+      const filteredProducts = all_product.filter(product => cartItems[product.id] > 0)
+        .map(product => ({
+          ...product,
+          quantity: cartItems[product.id],
+          totalPrice: cartItems[product.id] * product.new_price
+        }));
+
+      setOrderProduct(filteredProducts);
+      console.log('filteredProducts:', filteredProducts);
+    }
+  }, [all_product, checkout, cartItems]);
+
+
+  console.log(orderProduct , "orderrrrr")
+  
+
+
+
+
 
   useEffect(() => {
     // Store checkout state in local storage when it changes
@@ -31,7 +60,7 @@ const CartItems = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const paymentRes = await axios.post("https://ecommercebackend-1-02g7.onrender.com/payment", {
+        const paymentRes = await axios.post("https://ecommercebackend-11d1.onrender.com/payment", {
           tokenId: stripeToken.id,
           amount: getTotalCartAmount(),
         });
@@ -40,23 +69,34 @@ const CartItems = () => {
           console.log("Payment successful");
           console.log(userEmail, "email");
 
-          const checkoutRes = await axios.post(
-            "https://ecommercebackend-1-02g7.onrender.com/checkout",
-            { email: userEmail },
-            {
-              headers: {
-                "auth": `${localStorage.getItem("auth")}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          // const checkoutRes = await axios.post(
+          //   "http://localhost:8000/checkout",
+          //   { email: userEmail },
+          //   {
+          //     headers: {
+          //       "auth": `${localStorage.getItem("auth")}`,
+          //       "Content-Type": "application/json",
+          //     },
+          //   }
+          // );
 
-          if (checkoutRes.data.success) {
-            setCheckout(checkoutRes.data.resData.checkout);
+          // if (checkoutRes.data.success) {
+          //   setCheckout(checkoutRes.data.resData.checkout);
 
-          } else {
-            console.log("Checkout unsuccessful:", checkoutRes.data.message);
+          // } else {
+          //   console.log("Checkout unsuccessful:", checkoutRes.data.message);
+          // }
+             
+          const saveOrder = await axios.post("https://ecommercebackend-11d1.onrender.com/addToOrder" , { email : userEmail  , orderList : orderProduct })
+          if(saveOrder.data.success){
+            removeAllCart(userEmail)
           }
+
+          else{
+            console.log("product not added in orders")
+          }
+         
+
         } else {
           console.log("Payment unsuccessful:", paymentRes.data.message);
         }
@@ -70,34 +110,14 @@ const CartItems = () => {
     }
   }, [stripeToken, getTotalCartAmount, userEmail]);
 
-  const cancelOrder = async () => {
-    try {
-      const response = await axios.put(
-        "https://ecommercebackend-1-02g7.onrender.com/ordercancel",
-        { email: userEmail },
-        {
-          headers: {
-            "auth": `${localStorage.getItem("auth")}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
 
-      if (response.data.success && response.data.resData.checkout === true) {
-        setCheckout(false); // Explicitly set to false after cancelling order
-        toast.success("Order canceled successfully");
-      } else {
-        toast.error("Order cancellation unsuccessful");
-      }
-    } catch (error) {
-      console.error("Error cancelling order:", error);
-      toast.error("An error occurred while cancelling the order");
-    }
-  };
+
+
+ 
 
   // Logout function to clear local storage
 
-  console.log(checkout , "checkout")
+
 
   if (!isAuthenticated) {
     return <div className='cartitems-empty'></div>;
@@ -152,24 +172,7 @@ const CartItems = () => {
               <p>Total</p>
               <p>${getTotalCartAmount()}</p>
             </div>
-            {checkout ? (
-              <div
-                style={{
-                  backgroundColor: "yellow",
-                  textAlign: "center",
-                  color: "black",
-                  width: "150px",
-                  borderRadius: "4px",
-                  padding: "5px",
-                  cursor: "pointer"
-                }}
-                onClick={cancelOrder}
-              >
-                <p>Cancel Order</p>
-              </div>
-            ) : (
-              ""
-            )}
+           
           </div>
 
           {Object.values(cartItems).reduce((acc, curr) => acc + curr, 0) === 0 ? (

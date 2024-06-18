@@ -47,7 +47,7 @@ li a {
   width: 80%;
   height: 3px;
   border-radius: 10px;
-  background-color: red;
+  background-color: rgb(255, 17, 0);
 }
 
 .nav-login-cart {

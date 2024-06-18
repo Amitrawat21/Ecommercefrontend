@@ -7,7 +7,7 @@ const Popular = () => {
   const[data_product , set_data_product] = useState([])
 
   const getPopualarProduct = async()=>{
-    const allPopularProduct =  await axios.get("https://ecommercebackend-1-02g7.onrender.com/popularinwomen")
+    const allPopularProduct =  await axios.get("https://ecommercebackend-11d1.onrender.com/popularinwomen")
     set_data_product(allPopularProduct.data.womenData)
   }
 

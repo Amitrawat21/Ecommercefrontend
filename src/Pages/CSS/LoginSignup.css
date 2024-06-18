@@ -59,6 +59,7 @@ font-size: 18px;
 .loginsignup-login span{
     color: red;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .loginsignup-agree{

@@ -44,6 +44,14 @@
 
 }
 
+.shopcategory-search input{
+ 
+   
+    border: none;
+  outline: none;
+
+}
+
 .shopcategory-indexsSort p span {
     font-weight: 600;
 
@@ -55,6 +63,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
    column-gap: 40px;
+
 
 }
 
@@ -169,6 +178,10 @@ font-weight: 600;
     .shopcategory-loadmore{
         margin: 20px auto;
        
+    }
+
+    .shopcategory-search input{
+        border: none;
     }
 
     
