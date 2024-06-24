@@ -145,7 +145,7 @@ const ShopContextProvider = (props) => {
       );
       if (response.data.success) {
      
-        const res = response.data.allcheckoutData.find((ele) => ele.email === userEmail);
+        const res = response.data.allcheckoutData.find((ele) => ele?.email === userEmail);
         if (res) {
           setUserCheckout(res);
           console.log(res, "User checkout data");

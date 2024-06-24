@@ -5,10 +5,13 @@ import { useNavigate } from "react-router-dom";
 import validation from "../Validation/Validation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const Login = () => {
-  const history = useNavigate();
+ 
   const [state, setState] = useState("Login");
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     name: "",
@@ -36,6 +39,7 @@ const Login = () => {
   };
 
   const login = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://ecommercebackend-11d1.onrender.com/login",
@@ -65,9 +69,15 @@ const Login = () => {
     } catch (error) {
       toast.error("Login error:", error);
     }
+
+    finally{
+      setLoading(false);
+
+    }
   };
 
   const signup = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://ecommercebackend-11d1.onrender.com/register",
@@ -91,6 +101,10 @@ const Login = () => {
     } catch (error) {
       console.error("Signup error:", error);
     }
+    finally{
+      setLoading(false);
+
+    }
   };
 
   const handleValidation = (e) => {
@@ -110,6 +124,25 @@ const Login = () => {
 
   return (
     <div className="loginsignup">
+     {loading && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            zIndex: 1000,
+          }}
+        >
+          please wait ... &nbsp;
+          <CircularProgress />
+        </Box>
+      )}
       <div className="loginsignup-container">
         <h1>{state}</h1>
         <form className="loginsignup-fields" onSubmit={handleValidation}>

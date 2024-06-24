@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import sliderItems from "../../Data/Data.js";
- // Ensure this contains the correct media query for mobile
 
 const Container = styled.div`
   width: 100%;
@@ -11,11 +10,10 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  
 
   @media (max-width: 500px) {
     height: 70vh;
-    margin-top : 30px
+    margin-top: 30px;
   }
 `;
 
@@ -47,7 +45,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   transition: all 1.5s ease;
-  transform: translateX(${(props) => props.slideIndex * -100}vw);
+  transform: translateX(${(props) => props.slideindex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -138,7 +136,7 @@ const Hero = () => {
       <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowBackIcon />
       </Arrow>
-      <Wrapper slideIndex={slideIndex}>
+      <Wrapper slideindex={slideIndex}>
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
